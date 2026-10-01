@@ -36,13 +36,11 @@ public abstract class Ordination {
     public String toString() {
         return startDato.toString();
     }
-
+// abstrakte metoder
     /** Returner den totale dosis, der er givet i den periode, ordinationen er gyldig. */
     public abstract double samletDosis();
-
     /** Returner den gennemsnitlige dosis givet per dag. */
     public abstract double døgnDosis();
-
     /** Returner ordinations typen som en String (f.eks. "PN"). */
     public abstract String getType();
 }

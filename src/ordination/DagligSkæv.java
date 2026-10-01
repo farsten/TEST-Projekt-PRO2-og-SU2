@@ -17,11 +17,11 @@ public class DagligSkæv extends Ordination{
         this.mængde = mængde;
         this.patient = patient;
     }
-
+    @Override
     public double samletDosis(){
         return super.antalDage() * døgnDosis();
     }
-
+    @Override
     public double døgnDosis(){
         double dagligMængde = 0;
         for (double m : mængde) {
@@ -29,7 +29,7 @@ public class DagligSkæv extends Ordination{
         }
         return dagligMængde;
     }
-
+    @Override
     public String getType(){
         return "Daglig skæv";
     }
