@@ -103,7 +103,7 @@ public class OrdinationDetailsPane extends GridPane {
         LocalDate anvendtDato = datePicker.getValue();
         try {
             Controller.anvendOrdinationPN(pn, anvendtDato);
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             lblError.setText(e.getMessage());
             return;
         }

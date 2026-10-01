@@ -43,4 +43,8 @@ public abstract class Ordination {
     public abstract double døgnDosis();
     /** Returner ordinations typen som en String (f.eks. "PN"). */
     public abstract String getType();
+
+    public Lægemiddel getLægemiddel() {
+        return lægemiddel;
+    }
 }
