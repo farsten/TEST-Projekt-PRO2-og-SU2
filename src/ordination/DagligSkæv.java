@@ -37,4 +37,5 @@ public class DagligSkæv extends Ordination{
     public LocalTime[] getTidspunkter(){
         return tidspunkter;
     }
+
 }

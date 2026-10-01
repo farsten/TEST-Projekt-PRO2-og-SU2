@@ -45,6 +45,7 @@ public abstract class Controller {
         return dagligFast;
     }
 
+
     /**
      * Opret og returner en DagligSkæv ordination.
      * Hvis startDato er efter slutDato, kastes en IllegalArgumentException.
