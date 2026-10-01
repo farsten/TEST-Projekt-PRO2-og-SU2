@@ -40,9 +40,11 @@ public abstract class Controller {
         double morgenAntal, double middagAntal, double aftenAntal, double natAntal,
         Patient patient, @Nullable Lægemiddel lægemiddel
     ) {
-        // TODO
-        return new DagligFast();
+        DagligFast dagligFast = new DagligFast(startDato, slutDato, lægemiddel, morgenAntal, middagAntal, aftenAntal, natAntal);
+        patient.addOrdination(dagligFast);
+        return dagligFast;
     }
+
 
     /**
      * Opret og returner en DagligSkæv ordination.
@@ -55,8 +57,9 @@ public abstract class Controller {
         LocalDate startDen, LocalDate slutDen, LocalTime[] klokkeSlet, double[] antalEnheder,
         Patient patient, @Nullable Lægemiddel lægemiddel
     ) {
-        // TODO
-        return new DagligSkæv();
+        DagligSkæv dagligSkæv = new DagligSkæv(startDen, slutDen, lægemiddel, klokkeSlet, antalEnheder, patient);
+        patient.addOrdination(dagligSkæv);
+        return dagligSkæv;
     }
 
     /**

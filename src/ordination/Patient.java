@@ -2,11 +2,15 @@ package ordination;
 
 import org.jspecify.annotations.NullMarked;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @NullMarked
 public class Patient {
     private String cprNr;
     private String navn;
     private double vægt;
+    List<Ordination> ordinationer = new ArrayList<>();
 
     public Patient(String cprNr, String navn, double vægt) {
         this.cprNr = cprNr;
@@ -16,6 +20,10 @@ public class Patient {
 
     public double getVægt() {
         return vægt;
+    }
+
+    public void addOrdination(Ordination ordination){
+        ordinationer.add(ordination);
     }
 
     @Override
