@@ -94,8 +94,17 @@ public abstract class Controller {
     public static int antalOrdinationerPrVægtPrLægemiddel(
         double vægtStart, double vægtSlut, Lægemiddel lægemiddel
     ) {
-        // TODO
-        return 0;
+        int count = 0;
+        for(Patient p : storage.getAllePatienter()){
+            if(p.getVægt() > vægtStart && p.getVægt() < vægtSlut){
+                for(Ordination o : p.getOrdinationer()){
+                    if(o.getLægemiddel().equals(lægemiddel)){
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
     }
 
     public static List<Patient> getAllePatienter() {
