@@ -26,8 +26,9 @@ public abstract class Controller {
         LocalDate startDato, LocalDate slutDato, double antal,
         Patient patient, @Nullable Lægemiddel lægemiddel
     ) {
-        // TODO
-        return new PN();
+        PN pn = new PN(startDato, slutDato, lægemiddel, antal, patient);
+        patient.addOrdination(pn);
+        return pn;
     }
 
     /**
