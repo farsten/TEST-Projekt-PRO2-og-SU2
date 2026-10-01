@@ -67,8 +67,12 @@ public abstract class Controller {
      * Hvis datoen ikke er indenfor ordinationens gyldighedsperiode,
      * kastes en IllegalArgumentException.
      */
-    public static void anvendOrdinationPN(PN ordination, LocalDate dato) {
-        // TODO
+    public static void anvendOrdinationPN(PN ordination, LocalDate dato) throws Exception{
+        if(dato.isBefore(ordination.getStartDato()) || dato.isAfter(ordination.getSlutDato())){
+            throw new IllegalArgumentException();
+        } else {
+            ordination.anvendDosis(dato);
+        }
     }
 
     /**
