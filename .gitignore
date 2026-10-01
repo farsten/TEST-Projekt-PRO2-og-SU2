@@ -1,0 +1,6 @@
+### IntelliJ IDEA ###
+out/
+*.class
+
+### Mac OS ###
+.DS_Store
