@@ -6,8 +6,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
+    <orderEntry type="library" name="jspecify" level="application" />
+    <orderEntry type="library" name="javafx" level="application" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="javafx" level="application" />
-    <orderEntry type="library" exported="" name="jspecify" level="application" />
   </component>
 </module>
