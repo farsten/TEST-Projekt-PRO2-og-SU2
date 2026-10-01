@@ -20,6 +20,7 @@ public class DagligSkæv extends Ordination{
         this.mængde = mængde;
         this.patient = patient;
 
+
         for (int i = 0; i < tidspunkter.length; i++) {
             Dosis dosis = new Dosis(tidspunkter[i], mængde[i]);
             doser.add(dosis);
