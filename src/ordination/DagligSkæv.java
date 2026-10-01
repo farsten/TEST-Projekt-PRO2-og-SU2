@@ -3,23 +3,38 @@ package ordination;
 import org.jspecify.annotations.NullMarked;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @NullMarked
 public class DagligSkæv extends Ordination{
-    private LocalDate startDato;
-    private LocalDate slutDato;
     private LocalTime[] tidspunkter;
     private double[] mængde;
+    Patient patient;
 
-    public DagligSkæv(LocalDate startDato, LocalDate slutDato, LocalTime[] klokkeSlet, double[] mængde){
-
+    public DagligSkæv(LocalDate startDato, LocalDate slutDato, Lægemiddel lægemiddel, LocalTime[] tidspunkter, double[] mængde, Patient patient){
+        super(startDato, slutDato, lægemiddel);
+        this.tidspunkter = tidspunkter;
+        this.mængde = mængde;
+        this.patient = patient;
     }
 
-    public void angivDosisPaaKlokkeslet(LocalDateTime tidspunkt, int dosis){
+    public double samletDosis(){
+        return super.antalDage() * døgnDosis();
+    }
 
+    public double døgnDosis(){
+        double dagligMængde = 0;
+        for (double m : mængde) {
+            dagligMængde += m;
+        }
+        return dagligMængde;
+    }
+
+    public String getType(){
+        return "Daglig skæv";
+    }
+
+    public LocalTime[] getTidspunkter(){
+        return tidspunkter;
     }
 }
