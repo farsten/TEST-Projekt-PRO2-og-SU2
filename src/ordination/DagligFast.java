@@ -12,10 +12,10 @@ public class DagligFast extends Ordination{
 
     public DagligFast(LocalDate startDen, LocalDate slutDen, Lægemiddel lægemiddel, double morgen, double middag, double aften, double nat) {
         super(startDen,slutDen,lægemiddel);
-        opretDoser(morgen, middag, aften, nat);
+        tidsbedømmer(morgen, middag, aften, nat);
     }
 
-    private void opretDoser(double morgen, double middag, double aften, double nat) {
+    private void tidsbedømmer(double morgen, double middag, double aften, double nat) {
         if (morgen > 0 ) doser[0] = new Dosis(LocalTime.of(8, 0), morgen);
         if (middag > 0) doser[1] = new Dosis(LocalTime.of(12, 0), middag);
         if (aften > 0) doser[2] = new Dosis(LocalTime.of(18, 0), aften);
@@ -25,11 +25,6 @@ public class DagligFast extends Ordination{
     public Dosis[] getDoser() {
         return doser;
     }
-    @Override
-    public double samletDosis() {
-        return døgnDosis() * antalDage();
-    }
-
     @Override
     public double døgnDosis() {
         double total = 0;
@@ -42,8 +37,14 @@ public class DagligFast extends Ordination{
     }
 
     @Override
+    public double samletDosis() {
+        return døgnDosis() * antalDage();
+    }
+
+    @Override
     public String getType() {
         return "Daglig Fast";
     }
+
 
 }
