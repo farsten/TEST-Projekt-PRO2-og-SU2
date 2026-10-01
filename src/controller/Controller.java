@@ -81,8 +81,13 @@ public abstract class Controller {
      * (Den anbefalede dosis afhænger af patientens vægt.)
      */
     public static double anbefaletDosisPrDøgn(Patient patient, Lægemiddel lægemiddel) {
-        // TODO
-        return 0;
+        if(patient.getVægt() < 25){
+            return patient.getVægt() * lægemiddel.getAntalPrKgPrDøgnLet();
+        } else if(patient.getVægt() > 120){
+            return patient.getVægt() * lægemiddel.getAntalPrKgPrDøgnTung();
+        } else{
+            return patient.getVægt() * lægemiddel.getAntalPrKgPrDøgnNormal();
+        }
     }
 
     /** Returner antal ordinationer af lægemidlet for patienter med vægt i vægtintervallet. */
