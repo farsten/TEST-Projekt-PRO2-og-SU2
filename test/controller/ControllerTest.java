@@ -1,6 +1,5 @@
 package controller;
 
-import ordination.DagligFast;
 import ordination.Lægemiddel;
 import ordination.Patient;
 import org.junit.jupiter.api.Test;
@@ -9,8 +8,7 @@ import storage.Storage;
 import java.time.LocalDate;
 
 import static controller.Controller.opretPNOrdination;
-import static gui.TypeOrdination.PN;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ControllerTest {
     private final Storage storage = new Storage();
@@ -51,8 +49,29 @@ class ControllerTest {
     }
 
     @Test
-    void anbefaletDosisPrDøgn() {
+    void anbefaletDosisPrDøgn_under25kg() {
+        // under 25 kg
+        Patient patientVægt20 = new Patient("2", "let", 20);
+        double resultat = Controller.anbefaletDosisPrDøgn(patientVægt20, Kokain);
+        assertEquals(0.0002, resultat, 0.000001);
     }
+
+    @Test
+    void anbefaletDosisPrDøgn_mellem25og120kg() {
+      // mellem 25 kg og 70 kg
+        Patient normalPatient = new Patient("3", "Normal", 70);
+        double resultat = Controller.anbefaletDosisPrDøgn(normalPatient, Kokain);
+        assertEquals(0.007, resultat, 0.000001);
+    }
+
+    @Test
+    void anbefaletDosisPrDøgn_over120kg() {
+        // over 120 kg
+        Patient tungPatient = new Patient("4", "Tung", 130);
+        double resultat = Controller.anbefaletDosisPrDøgn(tungPatient, Kokain);
+        assertEquals(0.13, resultat, 0.000001);
+    }
+
 
     @Test
     void antalOrdinationerPrVægtPrLægemiddel() {
@@ -73,10 +92,12 @@ class ControllerTest {
     }
 
     @Test
-    void opretPatient() {
+    void constructPatient() {
+        assertEquals("Hej", PatientVægt20.getNavn());
     }
 
     @Test
-    void opretLægemiddel() {
+    void constructLægemiddel() {
+        assertEquals("Linjer", Kokain.getEnhed());
     }
 }
