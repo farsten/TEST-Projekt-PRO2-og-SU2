@@ -47,8 +47,17 @@ public class PN extends Ordination {
 
     @Override
     public double døgnDosis() {
-            return (antalGangeAnvendt() * antalEnheder) / (antalDage());
+        if (datoerAnvendt.isEmpty()) return 0;
+
+        LocalDate min = datoerAnvendt.getFirst();
+        LocalDate max = min;
+        for (LocalDate d : datoerAnvendt) {
+            if (d.isBefore(min)) min = d;
+            if (d.isAfter(max)) max = d;
         }
+        return samletDosis() / (int) ChronoUnit.DAYS.between(min, max) + 1;
+    }
+
     @Override
     public String getType() {
         return TypeOrdination.PN + "";
