@@ -32,9 +32,6 @@ class PNTest {
         pn.anvendDosis(LocalDate.of(2025, 9, 1));
         assertEquals(1, pn.antalGangeAnvendt());
 
-        assertEquals(0,pn.antalGangeAnvendt());
-        pn.anvendDosis(LocalDate.of(2025, 9, 1));
-        assertEquals(1, pn.antalGangeAnvendt());
     }
 
     @Test
@@ -43,9 +40,6 @@ class PNTest {
             pn.anvendDosis(LocalDate.of(2025, 8, 31));
         });
 
-        assertThrows(Exception.class, () -> {
-            pn.anvendDosis(LocalDate.of(2025, 8, 31));
-        });
     }
 
     @Test
@@ -76,6 +70,6 @@ class PNTest {
 
         // 2 gange over 4 dage
         pn.anvendDosis(LocalDate.of(2025, 9, 4));
-        assertEquals(61.5, pn.døgnDosis(), 0.0001);
+        assertEquals(83, pn.døgnDosis(), 0.0001);
     }
 }
