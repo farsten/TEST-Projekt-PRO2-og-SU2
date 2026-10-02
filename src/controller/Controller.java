@@ -58,7 +58,7 @@ public abstract class Controller {
         LocalDate startDen, LocalDate slutDen, LocalTime[] klokkeSlet, double[] antalEnheder,
         Patient patient, @Nullable Lægemiddel lægemiddel
     ) {
-        DagligSkæv dagligSkæv = new DagligSkæv(startDen, slutDen, lægemiddel, klokkeSlet, antalEnheder, patient);
+        DagligSkæv dagligSkæv = new DagligSkæv(startDen, slutDen, lægemiddel, klokkeSlet, antalEnheder);
         patient.addOrdination(dagligSkæv);
         return dagligSkæv;
     }

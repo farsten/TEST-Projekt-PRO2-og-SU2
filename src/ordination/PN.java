@@ -12,7 +12,6 @@ import java.util.List;
 public class PN extends Ordination {
     private double antalEnheder;
     private List<LocalDate> datoerAnvendt = new ArrayList<>();
-    private double samletAntalEnheder;
     private Patient patient;
 
     public PN(LocalDate startDen, LocalDate slutDen, Lægemiddel lægemiddel, double antalEnheder, Patient patient) {
@@ -43,19 +42,25 @@ public class PN extends Ordination {
 
     @Override
     public double samletDosis() {
-        return samletAntalEnheder + antalEnheder;
+        return antalGangeAnvendt() * antalEnheder;
     }
-
 
     @Override
     public double døgnDosis() {
-        return (antalGangeAnvendt() * antalEnheder) / ((int) ChronoUnit.DAYS.between(datoerAnvendt.getFirst(), datoerAnvendt.getLast()) + 1);
+        if (datoerAnvendt.isEmpty()) return 0;
+
+        LocalDate min = datoerAnvendt.getFirst();
+        LocalDate max = min;
+        for (LocalDate d : datoerAnvendt) {
+            if (d.isBefore(min)) min = d;
+            if (d.isAfter(max)) max = d;
+        }
+        return samletDosis() / (int) ChronoUnit.DAYS.between(min, max) + 1;
     }
 
     @Override
     public String getType() {
         return TypeOrdination.PN + "";
     }
-
 
 }

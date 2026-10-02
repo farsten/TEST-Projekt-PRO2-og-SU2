@@ -13,12 +13,12 @@ class DagligFastTest {
     @org.junit.jupiter.api.Test
     void døgnDosis() {
         double døgnDosis = dagligFast.døgnDosis();
-        assertEquals(12, døgnDosis, 0.0001);
+        assertEquals(12, døgnDosis);
     }
 
     @org.junit.jupiter.api.Test
     void samletDosis() {
         double samletDosis = dagligFast.samletDosis();
-        assertEquals(60, samletDosis, 0.0001);
+        assertEquals(60, samletDosis);
     }
 }
