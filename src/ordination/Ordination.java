@@ -36,6 +36,7 @@ public abstract class Ordination {
     public String toString() {
         return startDato.toString();
     }
+
 // abstrakte metoder
     /** Returner den totale dosis, der er givet i den periode, ordinationen er gyldig. */
     public abstract double samletDosis();
