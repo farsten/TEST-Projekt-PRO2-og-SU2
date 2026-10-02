@@ -57,15 +57,5 @@ public class PN extends Ordination {
         return TypeOrdination.PN + "";
     }
 
-    public List<LocalDate> getDatoerAnvendt() {
-        return datoerAnvendt;
-    }
 
-    public double getSamletAntalEnheder() {
-        return samletAntalEnheder;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
 }
