@@ -11,7 +11,7 @@ import java.util.List;
 @NullMarked
 public class PN extends Ordination {
     private double antalEnheder;
-    private int antalGangeAnvendt = 0;
+    private List<LocalDate> datoerAnvendt = new ArrayList<>();
     private double samletAntalEnheder;
     private Patient patient;
 
@@ -31,14 +31,14 @@ public class PN extends Ordination {
     public void anvendDosis(LocalDate dato) throws Exception {
         if (dato.isBefore(this.getStartDato()) || dato.isAfter(this.getSlutDato())) {
             throw new Exception("Datoen er ude fra slut og start dato");
-        } else antalGangeAnvendt++;
+        } else datoerAnvendt.add(dato);
     }
 
     /**
      * Returner antal gange ordinationen er anvendt.
      */
     public int antalGangeAnvendt() {
-        return antalGangeAnvendt;
+        return datoerAnvendt.size();
     }
 
     @Override
@@ -55,6 +55,10 @@ public class PN extends Ordination {
     @Override
     public String getType() {
         return TypeOrdination.PN + "";
+    }
+
+    public List<LocalDate> getDatoerAnvendt() {
+        return datoerAnvendt;
     }
 
     public double getSamletAntalEnheder() {
