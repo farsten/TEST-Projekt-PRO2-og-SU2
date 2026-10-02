@@ -30,7 +30,6 @@ class ControllerTest {
         assertEquals("Hej", PatientVægt20.getNavn());
         assertEquals("2", PatientVægt20.getCprNr());
         assertEquals(20, PatientVægt20.getVægt());
-
     }
 
     @Test
