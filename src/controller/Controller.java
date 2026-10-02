@@ -26,8 +26,9 @@ public abstract class Controller {
         LocalDate startDato, LocalDate slutDato, double antal,
         Patient patient, @Nullable Lægemiddel lægemiddel
     ) {
-        // TODO
-        return new PN();
+        PN pn = new PN(startDato, slutDato, lægemiddel, antal, patient);
+        patient.addOrdination(pn);
+        return pn;
     }
 
     /**
@@ -67,8 +68,12 @@ public abstract class Controller {
      * Hvis datoen ikke er indenfor ordinationens gyldighedsperiode,
      * kastes en IllegalArgumentException.
      */
-    public static void anvendOrdinationPN(PN ordination, LocalDate dato) {
-        // TODO
+    public static void anvendOrdinationPN(PN ordination, LocalDate dato) throws Exception{
+        if(dato.isBefore(ordination.getStartDato()) || dato.isAfter(ordination.getSlutDato())){
+            throw new IllegalArgumentException();
+        } else {
+            ordination.anvendDosis(dato);
+        }
     }
 
     /**
@@ -76,16 +81,30 @@ public abstract class Controller {
      * (Den anbefalede dosis afhænger af patientens vægt.)
      */
     public static double anbefaletDosisPrDøgn(Patient patient, Lægemiddel lægemiddel) {
-        // TODO
-        return 0;
+        if(patient.getVægt() < 25){
+            return patient.getVægt() * lægemiddel.getAntalPrKgPrDøgnLet();
+        } else if(patient.getVægt() > 120){
+            return patient.getVægt() * lægemiddel.getAntalPrKgPrDøgnTung();
+        } else{
+            return patient.getVægt() * lægemiddel.getAntalPrKgPrDøgnNormal();
+        }
     }
 
     /** Returner antal ordinationer af lægemidlet for patienter med vægt i vægtintervallet. */
     public static int antalOrdinationerPrVægtPrLægemiddel(
         double vægtStart, double vægtSlut, Lægemiddel lægemiddel
     ) {
-        // TODO
-        return 0;
+        int count = 0;
+        for(Patient p : storage.getAllePatienter()){
+            if(p.getVægt() > vægtStart && p.getVægt() < vægtSlut){
+                for(Ordination o : p.getOrdinationer()){
+                    if(o.getLægemiddel().equals(lægemiddel)){
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
     }
 
     public static List<Patient> getAllePatienter() {

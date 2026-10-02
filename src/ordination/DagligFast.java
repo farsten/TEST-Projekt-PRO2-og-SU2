@@ -9,10 +9,12 @@ import java.time.LocalTime;
 public class DagligFast extends Ordination{
     // Array der har alle tider på dagen
     private Dosis[] doser = new Dosis[4];
+    private Lægemiddel lægemiddel;
 
     public DagligFast(LocalDate startDen, LocalDate slutDen, Lægemiddel lægemiddel, double morgen, double middag, double aften, double nat) {
         super(startDen,slutDen,lægemiddel);
         tidsbedømmer(morgen, middag, aften, nat);
+        this.lægemiddel = lægemiddel;
     }
 
     private void tidsbedømmer(double morgen, double middag, double aften, double nat) {
@@ -46,5 +48,8 @@ public class DagligFast extends Ordination{
         return "Daglig Fast";
     }
 
-
+    @Override
+    public Lægemiddel getLægemiddel() {
+        return super.getLægemiddel();
+    }
 }

@@ -30,4 +30,16 @@ public class Patient {
     public String toString() {
         return navn + "  " + cprNr;
     }
+
+    public String getCprNr() {
+        return cprNr;
+    }
+
+    public String getNavn() {
+        return navn;
+    }
+
+    public List<Ordination> getOrdinationer() {
+        return ordinationer;
+    }
 }
