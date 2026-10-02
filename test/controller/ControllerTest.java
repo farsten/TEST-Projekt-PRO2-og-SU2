@@ -56,6 +56,7 @@ class ControllerTest {
         assertEquals(0.0002, resultat, 0.000001);
     }
 
+
     @Test
     void anbefaletDosisPrDøgn_mellem25og120kg() {
       // mellem 25 kg og 70 kg
