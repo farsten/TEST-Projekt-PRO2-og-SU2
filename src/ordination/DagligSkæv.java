@@ -11,14 +11,12 @@ import java.util.List;
 public class DagligSkæv extends Ordination{
     private LocalTime[] tidspunkter;
     private double[] mængde;
-    Patient patient;
     private List<Dosis> doser = new ArrayList<>();
 
-    public DagligSkæv(LocalDate startDato, LocalDate slutDato, Lægemiddel lægemiddel, LocalTime[] tidspunkter, double[] mængde, Patient patient){
+    public DagligSkæv(LocalDate startDato, LocalDate slutDato, Lægemiddel lægemiddel, LocalTime[] tidspunkter, double[] mængde){
         super(startDato, slutDato, lægemiddel);
         this.tidspunkter = tidspunkter;
         this.mængde = mængde;
-        this.patient = patient;
 
 
         for (int i = 0; i < tidspunkter.length; i++) {
