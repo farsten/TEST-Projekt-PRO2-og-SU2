@@ -14,9 +14,13 @@ class DagligSkævTest {
 
     @Test
     void samletDosis() {
+        double samletDosis = dagligSkæv.samletDosis();
+        assertEquals(320, samletDosis);
     }
 
     @Test
     void døgnDosis() {
+        double døgnDosis = dagligSkæv.døgnDosis();
+        assertEquals(10, døgnDosis);
     }
 }
