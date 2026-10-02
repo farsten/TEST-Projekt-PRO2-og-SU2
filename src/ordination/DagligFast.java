@@ -18,10 +18,10 @@ public class DagligFast extends Ordination{
     }
 
     private void tidsbedømmer(double morgen, double middag, double aften, double nat) {
-        if (morgen > 0 ) doser[0] = new Dosis(LocalTime.of(8, 0), morgen);
-        if (middag > 0) doser[1] = new Dosis(LocalTime.of(12, 0), middag);
-        if (aften > 0) doser[2] = new Dosis(LocalTime.of(18, 0), aften);
-        if (nat > 0) doser[3] = new Dosis(LocalTime.of(23, 0), nat);
+        doser[0] = new Dosis(LocalTime.of(8, 0), morgen);
+        doser[1] = new Dosis(LocalTime.of(12, 0), middag);
+        doser[2] = new Dosis(LocalTime.of(18, 0), aften);
+        doser[3] = new Dosis(LocalTime.of(23, 0), nat);
     }
 
     public Dosis[] getDoser() {
