@@ -169,12 +169,17 @@ public class OpretOrdinationDialog extends Stage {
     }
 
     private void opretSkæv() {
+
         if (startDato.getValue() == null || slutDato.getValue() == null) {
             lblError.setText("Datoer skal angives");
             return;
         }
 
         String[] doser = dagligSkævPane.getDosisArray();
+        if (makeAntal(doser).length == 0) {
+            lblError.setText("Mængden kan ikke være 0!");
+            return;
+        }
         try {
             Controller.opretDagligSkævOrdination(
                 startDato.getValue(), slutDato.getValue(),
