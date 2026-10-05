@@ -55,9 +55,8 @@ public class PN extends Ordination {
             if (d.isBefore(min)) min = d;
             if (d.isAfter(max)) max = d;
         }
-        if (datoerAnvendt.size() == 1) return samletDosis();
 
-        return samletDosis() / (int) ChronoUnit.DAYS.between(min, max) + 1;
+        return samletDosis() / (ChronoUnit.DAYS.between(min, max) + 1);
     }
 
     @Override

@@ -70,6 +70,6 @@ class PNTest {
 
         // 2 gange over 4 dage
         pn.anvendDosis(LocalDate.of(2025, 9, 4));
-        assertEquals(83, pn.døgnDosis(), 0.0001);
+        assertEquals(61.5, pn.døgnDosis(), 0.0001);
     }
 }
