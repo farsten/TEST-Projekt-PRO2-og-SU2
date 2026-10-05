@@ -20,6 +20,9 @@ class ControllerTest {
     LocalDate slutDato = LocalDate.of(2026, 1, 20);
     Lægemiddel Kokain = new Lægemiddel("Kokain", "Linjer", 0.00001, 0.0001, 0.001);
     Lægemiddel heroin = new Lægemiddel("Heroin", "Ske", 0.02, 0.06, 0.1);
+    Lægemiddel acetylsalicylsyre = new Lægemiddel("Acetylsalicylsyre", "styk", 0.1, 0.15, 0.16);
+    Lægemiddel paracetamol = new Lægemiddel("Paracetamol", "mL", 1, 1.5, 2);
+    Lægemiddel methotrexate = new Lægemiddel("Methotrexate", "styk", 0.01, 0.015, 0.02);
     double[] antalEnheder = new double[2];
     LocalTime[] klokkeSlet = new LocalTime[2];
 
@@ -30,7 +33,6 @@ class ControllerTest {
         assertEquals("Hej", PatientVægt20.getNavn());
         assertEquals("2", PatientVægt20.getCprNr());
         assertEquals(20, PatientVægt20.getVægt());
-
     }
 
     @Test
@@ -72,26 +74,49 @@ class ControllerTest {
     @Test
     void anbefaletDosisPrDøgn_under25kg() {
         // under 25 kg
-        Patient patientVægt20 = new Patient("2", "let", 20);
-        double resultat = Controller.anbefaletDosisPrDøgn(patientVægt20, Kokain);
-        assertEquals(0.0002, resultat, 0.000001);
+        Patient letPatientNul = new Patient("2", "let", 0);
+        Patient letPatient = new Patient("2", "let", 20);
+        Patient letPatientGrænse = new Patient("2", "let", 24);
+
+        double resultat = Controller.anbefaletDosisPrDøgn(letPatient, acetylsalicylsyre);
+        assertEquals(2, resultat, 0.000001);
+
+        double resultatGrænse = Controller.anbefaletDosisPrDøgn(letPatientGrænse, paracetamol);
+        assertEquals(24, resultatGrænse, 0.000001);
+
+        double resultatNul = Controller.anbefaletDosisPrDøgn(letPatientNul, paracetamol);
+        assertEquals(0, resultatNul, 0.000001);
     }
 
 
     @Test
     void anbefaletDosisPrDøgn_mellem25og120kg() {
       // mellem 25 kg og 70 kg
-        Patient normalPatient = new Patient("3", "Normal", 70);
-        double resultat = Controller.anbefaletDosisPrDøgn(normalPatient, Kokain);
-        assertEquals(0.007, resultat, 0.000001);
+        Patient normalPatient = new Patient("3", "Normal", 60);
+        Patient normalPatientNedreGrænse = new Patient("3", "Normal", 25);
+        Patient normalPatientØvreGrænse = new Patient("3", "Normal", 120);
+
+        double resultat = Controller.anbefaletDosisPrDøgn(normalPatient, acetylsalicylsyre);
+        assertEquals(9, resultat, 0.000001);
+
+        double resultatNedreGrænse = Controller.anbefaletDosisPrDøgn(normalPatientNedreGrænse, methotrexate);
+        assertEquals(0.375, resultatNedreGrænse, 0.0000000001);
+
+        double resultatØvreGrænse = Controller.anbefaletDosisPrDøgn(normalPatientØvreGrænse, methotrexate);
+        assertEquals(1.8, resultatØvreGrænse, 0.00001);
     }
 
     @Test
     void anbefaletDosisPrDøgn_over120kg() {
         // over 120 kg
-        Patient tungPatient = new Patient("4", "Tung", 130);
-        double resultat = Controller.anbefaletDosisPrDøgn(tungPatient, Kokain);
-        assertEquals(0.13, resultat, 0.000001);
+        Patient tungPatient = new Patient("4", "Tung", 145);
+        Patient tungPatientGrænse = new Patient("4", "Tung", 121);
+
+        double resultat = Controller.anbefaletDosisPrDøgn(tungPatient, acetylsalicylsyre);
+        assertEquals(23.2, resultat, 0.000001);
+
+        double resultatGrænse = Controller.anbefaletDosisPrDøgn(tungPatientGrænse, acetylsalicylsyre);
+        assertEquals(19.36, resultatGrænse, 0.000001);
     }
 
 
