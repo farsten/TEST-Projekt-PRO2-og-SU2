@@ -132,6 +132,8 @@ class ControllerTest {
 
         assertEquals(2, antalKok);
         assertEquals(1, antalHero);
+
+        assertThrows(NullPointerException.class, () -> Controller.antalOrdinationerPrVægtPrLægemiddel(-1, 150, null));
     }
 
     @Test
