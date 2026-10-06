@@ -96,7 +96,7 @@ public abstract class Controller {
     ) {
         int count = 0;
         for (Patient p : storage.getAllePatienter()) {
-            if (p.getVægt() > vægtStart && p.getVægt() < vægtSlut) {
+            if (p.getVægt() >= vægtStart && p.getVægt() <= vægtSlut) {
                 for (Ordination o : p.getOrdinationer()) {
                     try {
                         if (lægemiddel.equals(o.getLægemiddel())) {
