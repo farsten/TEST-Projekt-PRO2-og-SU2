@@ -36,14 +36,13 @@ public abstract class Controller {
      * Hvis startDato er efter slutDato, kastes en IllegalArgumentException.
      * Pre: morgenAntal, middagAntal, aftenAntal, natAntal er alle >= 0.
      */
-    public static DagligFast opretDagligFastOrdination(
+    public static void opretDagligFastOrdination(
         LocalDate startDato, LocalDate slutDato,
         double morgenAntal, double middagAntal, double aftenAntal, double natAntal,
         Patient patient, @Nullable Lægemiddel lægemiddel
     ) {
         DagligFast dagligFast = new DagligFast(startDato, slutDato, lægemiddel, morgenAntal, middagAntal, aftenAntal, natAntal);
         patient.addOrdination(dagligFast);
-        return dagligFast;
     }
 
 
@@ -54,13 +53,12 @@ public abstract class Controller {
      * kastes en IllegalArgumentException.
      * Pre: I antalEnheder er alle tal >= 0.
      */
-    public static DagligSkæv opretDagligSkævOrdination(
+    public static void opretDagligSkævOrdination(
         LocalDate startDen, LocalDate slutDen, LocalTime[] klokkeSlet, double[] antalEnheder,
         Patient patient, @Nullable Lægemiddel lægemiddel
     ) {
         DagligSkæv dagligSkæv = new DagligSkæv(startDen, slutDen, lægemiddel, klokkeSlet, antalEnheder);
         patient.addOrdination(dagligSkæv);
-        return dagligSkæv;
     }
 
     /**
@@ -98,7 +96,6 @@ public abstract class Controller {
         for (Patient p : storage.getAllePatienter()){
             if(p.getVægt() > vægtStart && p.getVægt() < vægtSlut){
                 for(Ordination o : p.getOrdinationer()){
-                    assert o.getLægemiddel() != null;
                     if(o.getLægemiddel().equals(lægemiddel)){
                         count++;
                     }

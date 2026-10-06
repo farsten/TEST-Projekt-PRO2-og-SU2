@@ -1,6 +1,7 @@
 package ordination;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -9,13 +10,11 @@ import java.util.List;
 
 @NullMarked
 public class DagligSkæv extends Ordination{
-    private final LocalTime[] tidspunkter;
     private final double[] mængde;
     private final List<Dosis> doser = new ArrayList<>();
 
-    public DagligSkæv(LocalDate startDato, LocalDate slutDato, Lægemiddel lægemiddel, LocalTime[] tidspunkter, double[] mængde){
+    public DagligSkæv(LocalDate startDato, LocalDate slutDato, @Nullable Lægemiddel lægemiddel, LocalTime[] tidspunkter, double[] mængde){
         super(startDato, slutDato, lægemiddel);
-        this.tidspunkter = tidspunkter;
         this.mængde = mængde;
 
 
