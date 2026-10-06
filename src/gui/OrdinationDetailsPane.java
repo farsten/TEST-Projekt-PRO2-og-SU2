@@ -13,7 +13,6 @@ import ordination.Dosis;
 import ordination.Ordination;
 import ordination.PN;
 import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
 
 import java.time.LocalDate;
 
@@ -37,7 +36,7 @@ public class OrdinationDetailsPane extends GridPane {
     private final TextField txtDosis = new TextField();
     private final TextField txtAnvendt = new TextField();
     private final DatePicker datePicker = new DatePicker();
-    private @Nullable PN pn;
+    private PN pn;
 
     private final Label lblError = new Label();
 
