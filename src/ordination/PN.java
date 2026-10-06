@@ -2,6 +2,7 @@ package ordination;
 
 import gui.TypeOrdination;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -10,11 +11,11 @@ import java.util.List;
 
 @NullMarked
 public class PN extends Ordination {
-    private double antalEnheder;
-    private List<LocalDate> datoerAnvendt = new ArrayList<>();
-    private Patient patient;
+    private final double antalEnheder;
+    private final List<LocalDate> datoerAnvendt = new ArrayList<>();
+    private final Patient patient;
 
-    public PN(LocalDate startDen, LocalDate slutDen, Lægemiddel lægemiddel, double antalEnheder, Patient patient) {
+    public PN(LocalDate startDen, LocalDate slutDen, @Nullable Lægemiddel lægemiddel, double antalEnheder, Patient patient) {
         super(startDen, slutDen, lægemiddel);
         this.antalEnheder = antalEnheder;
         this.patient = patient;
@@ -64,4 +65,7 @@ public class PN extends Ordination {
         return TypeOrdination.PN + "";
     }
 
+    public Patient getPatient() {
+        return patient;
+    }
 }

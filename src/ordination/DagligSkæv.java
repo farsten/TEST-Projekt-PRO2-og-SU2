@@ -9,9 +9,9 @@ import java.util.List;
 
 @NullMarked
 public class DagligSkæv extends Ordination{
-    private LocalTime[] tidspunkter;
-    private double[] mængde;
-    private List<Dosis> doser = new ArrayList<>();
+    private final LocalTime[] tidspunkter;
+    private final double[] mængde;
+    private final List<Dosis> doser = new ArrayList<>();
 
     public DagligSkæv(LocalDate startDato, LocalDate slutDato, Lægemiddel lægemiddel, LocalTime[] tidspunkter, double[] mængde){
         super(startDato, slutDato, lægemiddel);
@@ -45,10 +45,6 @@ public class DagligSkæv extends Ordination{
     @Override
     public String getType(){
         return "Daglig skæv";
-    }
-
-    public LocalTime[] getTidspunkter(){
-        return tidspunkter;
     }
 
     public List<Dosis> getDoser() {

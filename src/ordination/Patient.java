@@ -7,9 +7,9 @@ import java.util.List;
 
 @NullMarked
 public class Patient {
-    private String cprNr;
-    private String navn;
-    private double vægt;
+    private final String cprNr;
+    private final String navn;
+    private final double vægt;
     List<Ordination> ordinationer = new ArrayList<>();
 
     public Patient(String cprNr, String navn, double vægt) {

@@ -35,8 +35,8 @@ public class OpretOrdinationDialog extends Stage {
     private final Button btnFortryd = new Button("Fortryd");
 
     private final Label lblError = new Label();
-    private DagligFastPane dagligFastPane = new DagligFastPane(300);
-    private DagligSkævPane dagligSkævPane = new DagligSkævPane();
+    private final DagligFastPane dagligFastPane = new DagligFastPane(300);
+    private final DagligSkævPane dagligSkævPane = new DagligSkævPane();
 
     public OpretOrdinationDialog(Patient patient, Lægemiddel lægemiddel, TypeOrdination type) {
         this.patient = patient;

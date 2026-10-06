@@ -1,6 +1,7 @@
 package ordination;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -8,13 +9,11 @@ import java.time.LocalTime;
 @NullMarked
 public class DagligFast extends Ordination{
     // Array der har alle tider på dagen
-    private Dosis[] doser = new Dosis[4];
-    private Lægemiddel lægemiddel;
+    private final Dosis[] doser = new Dosis[4];
 
-    public DagligFast(LocalDate startDen, LocalDate slutDen, Lægemiddel lægemiddel, double morgen, double middag, double aften, double nat) {
+    public DagligFast(LocalDate startDen, LocalDate slutDen, @Nullable Lægemiddel lægemiddel, double morgen, double middag, double aften, double nat) {
         super(startDen,slutDen,lægemiddel);
         tidsbedømmer(morgen, middag, aften, nat);
-        this.lægemiddel = lægemiddel;
     }
 
     private void tidsbedømmer(double morgen, double middag, double aften, double nat) {
@@ -49,7 +48,8 @@ public class DagligFast extends Ordination{
     }
 
     @Override
-    public Lægemiddel getLægemiddel() {
+    public @Nullable Lægemiddel getLægemiddel() {
         return super.getLægemiddel();
     }
+
 }

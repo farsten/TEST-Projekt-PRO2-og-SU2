@@ -6,8 +6,8 @@ import java.time.LocalTime;
 
 @NullMarked
 public class Dosis {
-    private LocalTime tid;
-    private double antal;
+    private final LocalTime tid;
+    private final double antal;
 
     public Dosis(LocalTime tid, double antal) {
         this.tid = tid;

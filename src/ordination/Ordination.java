@@ -1,17 +1,18 @@
 package ordination;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 @NullMarked
 public abstract class Ordination {
-    private LocalDate startDato;
-    private LocalDate slutDato;
-    private Lægemiddel lægemiddel;
+    private final LocalDate startDato;
+    private final LocalDate slutDato;
+    private final @Nullable Lægemiddel lægemiddel;
 
-    public Ordination(LocalDate startDen, LocalDate slutDen, Lægemiddel lægemiddel) {
+    public Ordination(LocalDate startDen, LocalDate slutDen, @Nullable Lægemiddel lægemiddel) {
         this.startDato = startDen;
         this.slutDato = slutDen;
         this.lægemiddel = lægemiddel;
@@ -45,7 +46,7 @@ public abstract class Ordination {
     /** Returner ordinations typen som en String (f.eks. "PN"). */
     public abstract String getType();
 
-    public Lægemiddel getLægemiddel() {
+    public @Nullable Lægemiddel getLægemiddel() {
         return lægemiddel;
     }
 }

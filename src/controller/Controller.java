@@ -92,12 +92,13 @@ public abstract class Controller {
 
     /** Returner antal ordinationer af lægemidlet for patienter med vægt i vægtintervallet. */
     public static int antalOrdinationerPrVægtPrLægemiddel(
-        double vægtStart, double vægtSlut, Lægemiddel lægemiddel
+        double vægtStart, double vægtSlut, @Nullable Lægemiddel lægemiddel
     ) {
         int count = 0;
         for (Patient p : storage.getAllePatienter()){
             if(p.getVægt() > vægtStart && p.getVægt() < vægtSlut){
                 for(Ordination o : p.getOrdinationer()){
+                    assert o.getLægemiddel() != null;
                     if(o.getLægemiddel().equals(lægemiddel)){
                         count++;
                     }

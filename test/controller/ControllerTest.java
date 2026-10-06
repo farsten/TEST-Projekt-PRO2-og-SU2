@@ -60,13 +60,9 @@ class ControllerTest {
         LocalDate datoInde = LocalDate.of(2026, 1, 17);
         LocalDate datoUde = LocalDate.of(2026, 5, 17);
 
-        assertDoesNotThrow(() -> {
-            anvendOrdinationPN(PN, datoInde);
-        });
+        assertDoesNotThrow(() -> anvendOrdinationPN(PN, datoInde));
 
-        assertThrows(IllegalArgumentException.class, () -> {
-                    anvendOrdinationPN(PN, datoUde);
-                }
+        assertThrows(IllegalArgumentException.class, () -> anvendOrdinationPN(PN, datoUde)
         );
 
     }

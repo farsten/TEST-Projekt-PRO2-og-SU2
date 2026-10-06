@@ -4,11 +4,11 @@ import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class Lægemiddel {
-    private String navn;
-    private String enhed;
-    private double antalPrKgPrDøgnLet;    // faktor hvis patients vægt < 25 kg
-    private double antalPrKgPrDøgnNormal; // faktor hvis 25 kg <= patient vægt <= 120 kg
-    private double antalPrKgPrDøgnTung;   // faktor hvis patients vægt > 120 kg
+    private final String navn;
+    private final String enhed;
+    private final double antalPrKgPrDøgnLet;    // faktor hvis patients vægt < 25 kg
+    private final double antalPrKgPrDøgnNormal; // faktor hvis 25 kg <= patient vægt <= 120 kg
+    private final double antalPrKgPrDøgnTung;   // faktor hvis patients vægt > 120 kg
 
     public Lægemiddel(
         String navn, String enhed,
