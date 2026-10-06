@@ -23,8 +23,8 @@ public abstract class Controller {
      * Pre: antal > 0.
      */
     public static PN opretPNOrdination(
-        LocalDate startDato, LocalDate slutDato, double antal,
-        Patient patient, @Nullable Lægemiddel lægemiddel
+            LocalDate startDato, LocalDate slutDato, double antal,
+            Patient patient, @Nullable Lægemiddel lægemiddel
     ) {
         PN pn = new PN(startDato, slutDato, lægemiddel, antal, patient);
         patient.addOrdination(pn);
@@ -37,9 +37,9 @@ public abstract class Controller {
      * Pre: morgenAntal, middagAntal, aftenAntal, natAntal er alle >= 0.
      */
     public static void opretDagligFastOrdination(
-        LocalDate startDato, LocalDate slutDato,
-        double morgenAntal, double middagAntal, double aftenAntal, double natAntal,
-        Patient patient, @Nullable Lægemiddel lægemiddel
+            LocalDate startDato, LocalDate slutDato,
+            double morgenAntal, double middagAntal, double aftenAntal, double natAntal,
+            Patient patient, @Nullable Lægemiddel lægemiddel
     ) {
         DagligFast dagligFast = new DagligFast(startDato, slutDato, lægemiddel, morgenAntal, middagAntal, aftenAntal, natAntal);
         patient.addOrdination(dagligFast);
@@ -54,8 +54,8 @@ public abstract class Controller {
      * Pre: I antalEnheder er alle tal >= 0.
      */
     public static void opretDagligSkævOrdination(
-        LocalDate startDen, LocalDate slutDen, LocalTime[] klokkeSlet, double[] antalEnheder,
-        Patient patient, @Nullable Lægemiddel lægemiddel
+            LocalDate startDen, LocalDate slutDen, LocalTime[] klokkeSlet, double[] antalEnheder,
+            Patient patient, @Nullable Lægemiddel lægemiddel
     ) {
         DagligSkæv dagligSkæv = new DagligSkæv(startDen, slutDen, lægemiddel, klokkeSlet, antalEnheder);
         patient.addOrdination(dagligSkæv);
@@ -66,8 +66,8 @@ public abstract class Controller {
      * Hvis datoen ikke er indenfor ordinationens gyldighedsperiode,
      * kastes en IllegalArgumentException.
      */
-    public static void anvendOrdinationPN(PN ordination, LocalDate dato) throws Exception{
-        if(dato.isBefore(ordination.getStartDato()) || dato.isAfter(ordination.getSlutDato())){
+    public static void anvendOrdinationPN(PN ordination, LocalDate dato) throws Exception {
+        if (dato.isBefore(ordination.getStartDato()) || dato.isAfter(ordination.getSlutDato())) {
             throw new IllegalArgumentException();
         } else {
             ordination.anvendDosis(dato);
@@ -79,25 +79,31 @@ public abstract class Controller {
      * (Den anbefalede dosis afhænger af patientens vægt.)
      */
     public static double anbefaletDosisPrDøgn(Patient patient, Lægemiddel lægemiddel) {
-        if(patient.getVægt() < 25){
+        if (patient.getVægt() < 25) {
             return patient.getVægt() * lægemiddel.getAntalPrKgPrDøgnLet();
-        } else if(patient.getVægt() > 120){
+        } else if (patient.getVægt() > 120) {
             return patient.getVægt() * lægemiddel.getAntalPrKgPrDøgnTung();
-        } else{
+        } else {
             return patient.getVægt() * lægemiddel.getAntalPrKgPrDøgnNormal();
         }
     }
 
-    /** Returner antal ordinationer af lægemidlet for patienter med vægt i vægtintervallet. */
+    /**
+     * Returner antal ordinationer af lægemidlet for patienter med vægt i vægtintervallet.
+     */
     public static int antalOrdinationerPrVægtPrLægemiddel(
-        double vægtStart, double vægtSlut, @Nullable Lægemiddel lægemiddel
+            double vægtStart, double vægtSlut, Lægemiddel lægemiddel
     ) {
         int count = 0;
-        for (Patient p : storage.getAllePatienter()){
-            if(p.getVægt() > vægtStart && p.getVægt() < vægtSlut){
-                for(Ordination o : p.getOrdinationer()){
-                    if(o.getLægemiddel().equals(lægemiddel)){
-                        count++;
+        for (Patient p : storage.getAllePatienter()) {
+            if (p.getVægt() > vægtStart && p.getVægt() < vægtSlut) {
+                for (Ordination o : p.getOrdinationer()) {
+                    try {
+                        if (lægemiddel.equals(o.getLægemiddel())) {
+                            count++;
+                        }
+                    } catch (NullPointerException nullPointerException) {
+                        throw new NullPointerException();
                     }
                 }
             }
@@ -120,12 +126,12 @@ public abstract class Controller {
     }
 
     public static Lægemiddel opretLægemiddel(
-        String navn, String enhed,
-        double enhedPrKgPrDøgnLet, double enhedPrKgPrDøgnNormal, double enhedPrKgPrDøgnTung
+            String navn, String enhed,
+            double enhedPrKgPrDøgnLet, double enhedPrKgPrDøgnNormal, double enhedPrKgPrDøgnTung
     ) {
         Lægemiddel lm = new Lægemiddel(
-            navn, enhed,
-            enhedPrKgPrDøgnLet, enhedPrKgPrDøgnNormal, enhedPrKgPrDøgnTung
+                navn, enhed,
+                enhedPrKgPrDøgnLet, enhedPrKgPrDøgnNormal, enhedPrKgPrDøgnTung
         );
         storage.storeLægemiddel(lm);
         return lm;
