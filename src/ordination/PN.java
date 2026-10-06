@@ -51,7 +51,7 @@ public class PN extends Ordination {
 
         LocalDate min = datoerAnvendt.getFirst();
         LocalDate max = min;
-        for (LocalDate d : datoerAnvendt) {
+        for (LocalDate d : datoerAnvendt) { //for at det i rækkefælge (kun første og sidste anvendelse)
             if (d.isBefore(min)) min = d;
             if (d.isAfter(max)) max = d;
         }

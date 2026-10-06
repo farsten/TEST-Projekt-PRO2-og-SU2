@@ -18,7 +18,7 @@ class PNTest {
         patient = new Patient("121256-0512", "Jane Jensen", 63.4);
         lægemiddel = new Lægemiddel("Paracetamol", "mL", 1, 1.5, 2);
         pn = new PN(
-                LocalDate.of(2025, 9, 1),
+                LocalDate.of(2025, 8, 31),
                 LocalDate.of(2025, 9, 12),
                 lægemiddel,
                 123.0,
@@ -37,7 +37,7 @@ class PNTest {
     @Test
     void anvendDosis_ugyldigDatoKasterException() {
         assertThrows(Exception.class, () -> {
-            pn.anvendDosis(LocalDate.of(2025, 8, 31));
+            pn.anvendDosis(LocalDate.of(2025, 8, 30));
         });
 
     }
@@ -71,5 +71,10 @@ class PNTest {
         // 2 gange over 4 dage
         pn.anvendDosis(LocalDate.of(2025, 9, 4));
         assertEquals(61.5, pn.døgnDosis(), 0.0001);
+
+        // 4 gange over 6 dage forkert rækkefølge
+        pn.anvendDosis(LocalDate.of(2025, 9, 3));
+        pn.anvendDosis(LocalDate.of(2025, 8, 31));
+        assertEquals(98.4, pn.døgnDosis(), 0.0001);
     }
 }
